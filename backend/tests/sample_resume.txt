@@ -1,0 +1,34 @@
+Aditya Gupta
+Full Stack & AI Engineer
+Email: aditya.gupta@example.com | Phone: +1-555-0199 | San Francisco, CA
+LinkedIn: linkedin.com/in/adityagupta | GitHub: github.com/adityagupta
+
+PROFESSIONAL SUMMARY
+Results-driven Full Stack & AI Engineer with 4+ years of experience designing, building, and deploying scalable distributed systems and machine learning pipelines. Experienced in React, Node.js, Python, TypeScript, Docker, Kubernetes, AWS, and MongoDB.
+
+TECHNICAL SKILLS
+- Languages: Python, JavaScript, TypeScript, SQL, HTML, CSS
+- Frontend: React, Redux, Tailwind CSS, Vite, Next.js
+- Backend: Node.js, Express.js, FastAPI, REST APIs, GraphQL
+- Databases & Caching: MongoDB, PostgreSQL, Redis, Mongoose
+- Cloud & DevOps: Docker, Docker Compose, Kubernetes, AWS, Azure, CI/CD, Git, GitHub Actions
+- AI/ML & Data: scikit-learn, spaCy, NLTK, TF-IDF, Pandas, NumPy
+
+WORK EXPERIENCE
+Senior Full Stack Engineer | CloudScale Systems | 2022 - Present
+- Architected and deployed microservices handling 2M+ daily requests using Node.js, Express, and Redis caching.
+- Designed BullMQ asynchronous worker pipeline reducing document processing latency by 65%.
+- Implemented real-time telemetry and monitoring with Azure Application Insights.
+
+Software Engineer | NovaTech Solutions | 2020 - 2022
+- Developed responsive web interfaces using React, TypeScript, and Tailwind CSS.
+- Built RESTful APIs using Python FastAPI and PostgreSQL with 99.9% uptime.
+- Optimized database indexing and MongoDB aggregation pipelines reducing query latency by 40%.
+
+EDUCATION
+Bachelor of Science in Computer Science
+University of California, Berkeley (2016 - 2020)
+
+PROJECTS
+- AI Resume Job Matcher: Built full-stack platform using React, FastAPI, spaCy, TF-IDF, and Docker.
+- Distributed Task Engine: Scalable job processing queue using Node.js, Redis, and BullMQ.

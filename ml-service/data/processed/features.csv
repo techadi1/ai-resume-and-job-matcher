@@ -1,0 +1,8 @@
+metric,value
+total_resumes,166.0
+resume_categories_count,25.0
+total_jobs,93.0
+job_categories_count,2.0
+canonical_skills_vocab_size,69.0
+avg_skills_per_resume,3.42
+avg_skills_per_job,3.48
