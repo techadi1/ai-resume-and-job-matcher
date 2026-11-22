@@ -1,0 +1,802 @@
+[
+  {
+    "title": "Software Engineer",
+    "company": "Microsoft",
+    "location": "Noida, India (Hybrid)",
+    "type": "Full-time",
+    "salary": "₹8–14 LPA",
+    "description": "Microsoft is seeking a Software Engineer to work on core cloud platform tooling and services. You will design, develop, and test scalable web services, microservices, and modern user experiences.",
+    "responsibilities": [
+      "Develop reliable backend microservices and RESTful APIs using Python, Node.js, and SQL",
+      "Build high-performance web components using React and TypeScript",
+      "Collaborate across multidisciplinary teams to ensure security, observability, and scale",
+      "Write comprehensive unit and integration tests and participate in code reviews"
+    ],
+    "requiredSkills": ["Python", "React", "Node.js", "SQL", "Git"],
+    "preferredSkills": ["Docker", "Redis", "Azure", "CI/CD"],
+    "experience": "Entry-Mid Level (1-3 years)",
+    "education": "Bachelor's in Computer Science, Software Engineering, or related technical field",
+    "applicationUrl": "https://careers.microsoft.com/jobs/swe-noida",
+    "postedDate": "2026-09-28"
+  },
+  {
+    "title": "Backend Engineer",
+    "company": "Razorpay",
+    "location": "Bengaluru, India (Hybrid)",
+    "type": "Full-time",
+    "salary": "₹14–22 LPA",
+    "description": "Join Razorpay's payments platform engineering team to build fault-tolerant, high-throughput financial infrastructure handling millions of transactions daily.",
+    "responsibilities": [
+      "Architect and scale distributed payment gateway services using Node.js, Go, or Python",
+      "Optimize relational and NoSQL database queries across PostgreSQL and MongoDB",
+      "Implement resilient message queues and distributed caching with Redis and Kafka",
+      "Ensure adherence to PCI-DSS compliance and financial data security standards"
+    ],
+    "requiredSkills": ["Node.js", "Express", "PostgreSQL", "Redis", "Docker", "REST API", "Git"],
+    "preferredSkills": ["Go", "Kafka", "Kubernetes", "AWS"],
+    "experience": "Mid Level (2-4 years)",
+    "education": "B.Tech/B.E. in Computer Science or equivalent practical experience",
+    "applicationUrl": "https://razorpay.com/jobs/backend-engineer-bengaluru",
+    "postedDate": "2026-09-25"
+  },
+  {
+    "title": "Full Stack Developer",
+    "company": "Flipkart",
+    "location": "Bengaluru, India (Onsite)",
+    "type": "Full-time",
+    "salary": "₹16–25 LPA",
+    "description": "Flipkart is looking for an agile Full Stack Developer to build delightful shopping interfaces and resilient backend microservices powering e-commerce discovery.",
+    "responsibilities": [
+      "Build modular, responsive web applications using React, Next.js, and Tailwind CSS",
+      "Develop and maintain scalable backend REST APIs using Node.js and MongoDB",
+      "Work closely with UI/UX designers and product managers to improve customer conversion",
+      "Monitor application performance, bundle size, and Core Web Vitals"
+    ],
+    "requiredSkills": ["React", "JavaScript", "TypeScript", "Node.js", "MongoDB", "REST API", "Git"],
+    "preferredSkills": ["Next.js", "Docker", "Redux", "Tailwind CSS"],
+    "experience": "Mid Level (2-4 years)",
+    "education": "Bachelor's degree in Engineering, Computer Applications, or related field",
+    "applicationUrl": "https://www.flipkartcareers.com/jobs/fullstack-dev",
+    "postedDate": "2026-09-22"
+  },
+  {
+    "title": "Data Scientist",
+    "company": "Zomato",
+    "location": "Gurugram, India (Hybrid)",
+    "type": "Full-time",
+    "salary": "₹12–18 LPA",
+    "description": "Zomato is hiring a Data Scientist to build predictive dispatch, delivery time estimation, and restaurant recommendation algorithms across high-density urban clusters.",
+    "responsibilities": [
+      "Develop predictive machine learning models using Scikit-learn, XGBoost, and Pandas",
+      "Analyze massive geospatial telemetry and order fulfillment data using SQL",
+      "Design and evaluate statistical A/B tests on live production user cohorts",
+      "Collaborate with backend engineers to deploy real-time ML inference services"
+    ],
+    "requiredSkills": ["Python", "Machine Learning", "Scikit-learn", "Pandas", "SQL", "Statistics", "Git"],
+    "preferredSkills": ["PyTorch", "Tableau", "FastAPI", "Docker"],
+    "experience": "Mid Level (2-4 years)",
+    "education": "Bachelor's or Master's in Computer Science, Data Science, Statistics, or Mathematics",
+    "applicationUrl": "https://zomato.com/careers/data-scientist",
+    "postedDate": "2026-09-20"
+  },
+  {
+    "title": "Machine Learning Engineer",
+    "company": "Swiggy",
+    "location": "Bengaluru, India (Remote)",
+    "type": "Full-time",
+    "salary": "₹15–24 LPA",
+    "description": "Swiggy is seeking an ML Engineer to develop search ranking, natural language query understanding, and catalog tagging models using deep learning and NLP.",
+    "responsibilities": [
+      "Train and evaluate NLP and recommendation models using PyTorch and Hugging Face",
+      "Build high-throughput inference microservices in Python using FastAPI and Docker",
+      "Implement automated feature pipelines and model monitoring workflows",
+      "Optimize model latency and memory footprints for production deployment"
+    ],
+    "requiredSkills": ["Python", "PyTorch", "Natural Language Processing", "Machine Learning", "FastAPI", "Docker", "Git"],
+    "preferredSkills": ["Kubernetes", "AWS", "MLOps", "Transformers"],
+    "experience": "Mid-Senior (3-5 years)",
+    "education": "B.Tech/M.Tech in Computer Science, AI, or Data Science",
+    "applicationUrl": "https://swiggy.com/careers/mle-bengaluru",
+    "postedDate": "2026-09-18"
+  },
+  {
+    "title": "Frontend Engineer",
+    "company": "PhonePe",
+    "location": "Pune, India (Hybrid)",
+    "type": "Full-time",
+    "salary": "₹10–16 LPA",
+    "description": "PhonePe is looking for a Frontend Engineer passionate about clean design, responsive layouts, and lightning-fast checkout experiences across web and mobile web.",
+    "responsibilities": [
+      "Translate Figma prototypes into pixel-perfect, accessible React components",
+      "Optimize rendering performance, DOM size, and client-side caching",
+      "Collaborate with product designers and backend engineers to define API contracts",
+      "Maintain automated UI unit test suites using Jest and React Testing Library"
+    ],
+    "requiredSkills": ["React", "JavaScript", "TypeScript", "HTML", "CSS", "Tailwind CSS", "Git"],
+    "preferredSkills": ["Jest", "Next.js", "Redux", "Webpack"],
+    "experience": "Entry-Mid Level (1-3 years)",
+    "education": "Bachelor's degree in CS, IT, or equivalent practical experience",
+    "applicationUrl": "https://phonepe.com/careers/frontend-engineer-pune",
+    "postedDate": "2026-09-24"
+  },
+  {
+    "title": "Cloud Solutions Engineer",
+    "company": "Amazon Web Services",
+    "location": "Hyderabad, India (Hybrid)",
+    "type": "Full-time",
+    "salary": "₹18–28 LPA",
+    "description": "AWS is seeking a Cloud Solutions Engineer to architect enterprise-grade cloud native workloads, container orchestrations, and infrastructure-as-code automation.",
+    "responsibilities": [
+      "Design secure, multi-region cloud infrastructures on AWS using Terraform and CloudFormation",
+      "Deploy containerized microservices to Amazon ECS and EKS (Kubernetes)",
+      "Automate CI/CD pipelines, security compliance auditing, and cloud cost governance",
+      "Troubleshoot network, storage, and container runtime issues in production environments"
+    ],
+    "requiredSkills": ["AWS", "Linux", "Docker", "Python", "Git", "Problem Solving"],
+    "preferredSkills": ["Kubernetes", "Terraform", "CI/CD", "Bash"],
+    "experience": "Mid Level (3-5 years)",
+    "education": "Bachelor's in Computer Science, Information Technology, or relevant engineering field",
+    "applicationUrl": "https://amazon.jobs/en/jobs/cloud-solutions-hyd",
+    "postedDate": "2026-09-26"
+  },
+  {
+    "title": "Associate Software Engineer",
+    "company": "Tata 1mg",
+    "location": "Delhi NCR, India (Hybrid)",
+    "type": "Full-time",
+    "salary": "₹8–13 LPA",
+    "description": "Join Tata 1mg's digital healthcare platform engineering team building consumer health services, prescription management, and telemedicine consultation workflows.",
+    "responsibilities": [
+      "Build robust backend APIs using Python, Django, or Node.js",
+      "Write structured SQL queries and manage PostgreSQL schemas",
+      "Implement third-party API integrations and webhooks with retry mechanisms",
+      "Participate in agile sprint ceremonies, code reviews, and technical documentation"
+    ],
+    "requiredSkills": ["Python", "SQL", "REST API", "Git", "Problem Solving"],
+    "preferredSkills": ["Django", "PostgreSQL", "Docker", "Node.js"],
+    "experience": "Entry Level (0-2 years)",
+    "education": "B.Tech/B.E./MCA in Computer Science or related engineering stream",
+    "applicationUrl": "https://1mg.com/careers/associate-swe",
+    "postedDate": "2026-09-29"
+  },
+  {
+    "title": "Full Stack Developer",
+    "company": "NovaTech Solutions",
+    "location": "San Francisco, CA (Hybrid)",
+    "type": "Full-time",
+    "salary": "$125,000 - $155,000",
+    "description": "We are seeking a talented Full Stack Developer to build modern web applications using React, Node.js, and MongoDB. You will collaborate with product teams to design scalable microservices and intuitive user interfaces.",
+    "responsibilities": [
+      "Develop responsive frontend interfaces with React and Tailwind CSS",
+      "Design and maintain REST APIs using Node.js and Express",
+      "Manage MongoDB schemas and perform query optimization",
+      "Implement CI/CD workflows and automated testing"
+    ],
+    "requiredSkills": ["JavaScript", "TypeScript", "React", "Node.js", "Express", "MongoDB", "REST API", "Git"],
+    "preferredSkills": ["Docker", "AWS", "Redis", "GraphQL"],
+    "experience": "Mid Level (2-4 years)",
+    "education": "Bachelor's in Computer Science, Software Engineering, or related field",
+    "applicationUrl": "https://novatech.example.com/careers/full-stack-dev",
+    "postedDate": "2026-09-15"
+  },
+  {
+    "title": "Frontend Developer",
+    "company": "VividCraft Media",
+    "location": "New York, NY (Remote)",
+    "type": "Full-time",
+    "salary": "$105,000 - $135,000",
+    "description": "VividCraft is looking for an experienced Frontend Developer passionate about crafting pixel-perfect, accessible, and high-performance web experiences with React, TypeScript, and modern CSS tooling.",
+    "responsibilities": [
+      "Translate Figma designs into reusable React components",
+      "Optimize web application performance, bundle size, and SEO metrics",
+      "Ensure web accessibility (WCAG 2.1 AA) compliance across platforms",
+      "Work closely with backend teams on REST API integrations"
+    ],
+    "requiredSkills": ["React", "JavaScript", "TypeScript", "HTML", "CSS", "Tailwind CSS", "Git"],
+    "preferredSkills": ["Next.js", "Redux", "GraphQL", "Jest"],
+    "experience": "Entry-Mid Level (1-3 years)",
+    "education": "Bachelor's degree or equivalent practical experience",
+    "applicationUrl": "https://vividcraft.example.com/careers/frontend-dev",
+    "postedDate": "2026-09-18"
+  },
+  {
+    "title": "Backend Developer",
+    "company": "FinPulse Core",
+    "location": "Austin, TX (Hybrid)",
+    "type": "Full-time",
+    "salary": "$130,000 - $160,000",
+    "description": "Join FinPulse to develop high-throughput transaction processing microservices and distributed ledger integrations. You will architect robust backend systems with Node.js, Express, PostgreSQL, and Redis.",
+    "responsibilities": [
+      "Architect and build scalable backend services with Node.js and TypeScript",
+      "Design relational schemas and complex queries in PostgreSQL",
+      "Implement Redis caching, job queues, and pub/sub message brokers",
+      "Maintain high availability, data security, and API documentation"
+    ],
+    "requiredSkills": ["Node.js", "Express", "PostgreSQL", "Redis", "TypeScript", "REST API", "Git"],
+    "preferredSkills": ["Docker", "Kubernetes", "AWS", "Microservices"],
+    "experience": "Mid-Senior (3-5 years)",
+    "education": "Bachelor's in Computer Science, Engineering, or relevant discipline",
+    "applicationUrl": "https://finpulse.example.com/jobs/backend-engineer",
+    "postedDate": "2026-09-20"
+  },
+  {
+    "title": "Software Engineer",
+    "company": "Nexus Distributed Systems",
+    "location": "Seattle, WA (Remote)",
+    "type": "Full-time",
+    "salary": "$135,000 - $170,000",
+    "description": "Nexus is building core cloud orchestration tools. As a Software Engineer, you will write efficient, testable code in Python, Java, or C++, implement distributed consensus algorithms, and monitor services in production.",
+    "responsibilities": [
+      "Write clean, modular code following design patterns and SOLID principles",
+      "Perform code reviews, unit tests, and integration testing",
+      "Optimize data structures and algorithms for high-concurrency systems",
+      "Collaborate with DevOps engineers on containerized deployments"
+    ],
+    "requiredSkills": ["Python", "Java", "SQL", "Git", "GitHub", "Linux"],
+    "preferredSkills": ["C++", "Docker", "REST API", "CI/CD"],
+    "experience": "Mid Level (2-4 years)",
+    "education": "Bachelor's or Master's in Computer Science",
+    "applicationUrl": "https://nexus-systems.example.com/careers/swe",
+    "postedDate": "2026-09-22"
+  },
+  {
+    "title": "Machine Learning Engineer",
+    "company": "Aura Intelligence Labs",
+    "location": "San Francisco, CA (Remote)",
+    "type": "Full-time",
+    "salary": "$150,000 - $190,000",
+    "description": "Aura Intelligence develops computer vision and NLP models for enterprise clients. We are seeking an ML Engineer to train, fine-tune, and deploy deep neural networks into low-latency production inference environments.",
+    "responsibilities": [
+      "Train and fine-tune ML and deep learning models with PyTorch and Scikit-learn",
+      "Build feature engineering pipelines using Pandas, NumPy, and SQL",
+      "Deploy inference endpoints with FastAPI and Docker on AWS",
+      "Monitor model drift, latency, and prediction accuracy in production"
+    ],
+    "requiredSkills": ["Python", "PyTorch", "Scikit-learn", "Pandas", "NumPy", "Machine Learning", "Git"],
+    "preferredSkills": ["FastAPI", "Docker", "AWS", "TensorFlow", "MLOps"],
+    "experience": "Mid-Senior (3-5 years)",
+    "education": "Master's or Bachelor's in CS, AI, Data Science, or related quantitative field",
+    "applicationUrl": "https://auraintel.example.com/careers/mle",
+    "postedDate": "2026-09-25"
+  },
+  {
+    "title": "AI Engineer",
+    "company": "Synthetix AI",
+    "location": "Boston, MA (Hybrid)",
+    "type": "Full-time",
+    "salary": "$160,000 - $200,000",
+    "description": "Synthetix AI is pioneering generative AI copilot tools. As an AI Engineer, you will build LLM agent workflows, integrate vector databases, and implement semantic search and retrieval-augmented generation (RAG) systems.",
+    "responsibilities": [
+      "Design and deploy LLM applications with LangChain, LlamaIndex, and OpenAI/Anthropic APIs",
+      "Build vector search pipelines with embeddings, TF-IDF, and cosine similarity",
+      "Develop high-performance REST APIs in Python using FastAPI",
+      "Containerize applications and deploy microservices to Kubernetes"
+    ],
+    "requiredSkills": ["Python", "FastAPI", "Natural Language Processing", "Machine Learning", "REST API", "Docker", "Git"],
+    "preferredSkills": ["LangChain", "PyTorch", "Kubernetes", "Redis", "AWS"],
+    "experience": "Mid-Senior (3-5 years)",
+    "education": "Bachelor's or Master's in Computer Science or Artificial Intelligence",
+    "applicationUrl": "https://synthetix-ai.example.com/careers/ai-engineer",
+    "postedDate": "2026-09-27"
+  },
+  {
+    "title": "Data Scientist",
+    "company": "Crestview Analytics",
+    "location": "Chicago, IL (Remote)",
+    "type": "Full-time",
+    "salary": "$120,000 - $150,000",
+    "description": "Crestview Analytics empowers Fortune 500 retailers with predictive pricing and demand forecasting. You will design hypothesis tests, build predictive regression and classification models, and interpret statistical findings.",
+    "responsibilities": [
+      "Analyze massive customer behavioral data with SQL and Pandas",
+      "Build predictive models using Scikit-learn, XGBoost, and statistical modeling",
+      "Design and evaluate A/B experiments to measure business impact",
+      "Communicate data insights and recommendations to executive stakeholders"
+    ],
+    "requiredSkills": ["Python", "Data Science", "Scikit-learn", "Pandas", "SQL", "Statistics", "Git"],
+    "preferredSkills": ["Tableau", "Power BI", "Data Visualization", "Spark"],
+    "experience": "Mid Level (2-4 years)",
+    "education": "Bachelor's or Master's in Statistics, Data Science, Mathematics, or CS",
+    "applicationUrl": "https://crestview.example.com/careers/data-scientist",
+    "postedDate": "2026-09-21"
+  },
+  {
+    "title": "Data Analyst",
+    "company": "OmniMetric Insights",
+    "location": "Denver, CO (Hybrid)",
+    "type": "Full-time",
+    "salary": "$80,000 - $105,000",
+    "description": "OmniMetric is looking for an analytical thinker to transform raw operational data into dashboards, KPIs, and actionable intelligence. You will write complex SQL queries, build Power BI reports, and collaborate with operations.",
+    "responsibilities": [
+      "Extract, clean, and validate data across relational and warehouse databases",
+      "Build and maintain interactive Power BI and Tableau dashboards",
+      "Conduct exploratory analysis using Python and Excel spreadsheets",
+      "Deliver weekly and monthly KPI presentations to team leads"
+    ],
+    "requiredSkills": ["SQL", "Data Analysis", "Power BI", "Excel", "Python", "Data Visualization"],
+    "preferredSkills": ["Tableau", "Statistics", "PostgreSQL"],
+    "experience": "Entry-Mid Level (1-3 years)",
+    "education": "Bachelor's in Business Analytics, Computer Science, Economics, or related",
+    "applicationUrl": "https://omnimetric.example.com/careers/data-analyst",
+    "postedDate": "2026-09-24"
+  },
+  {
+    "title": "DevOps Engineer",
+    "company": "Kubernetix Cloud",
+    "location": "Seattle, WA (Remote)",
+    "type": "Full-time",
+    "salary": "$135,000 - $165,000",
+    "description": "Kubernetix is seeking an automation-focused DevOps Engineer to maintain our cloud infrastructure, manage Kubernetes clusters, and build robust continuous integration and delivery pipelines.",
+    "responsibilities": [
+      "Provision and automate infrastructure using Terraform and Ansible",
+      "Manage Kubernetes clusters, container orchestration, and Helm charts",
+      "Build, monitor, and optimize CI/CD pipelines in GitHub Actions and Jenkins",
+      "Configure Prometheus and Grafana alerting for system reliability"
+    ],
+    "requiredSkills": ["Docker", "Kubernetes", "AWS", "CI/CD", "Linux", "Git", "GitHub"],
+    "preferredSkills": ["Terraform", "Prometheus", "Grafana", "Python", "Bash"],
+    "experience": "Mid-Senior (3-5 years)",
+    "education": "Bachelor's in Computer Science, Information Technology, or equivalent experience",
+    "applicationUrl": "https://kubernetix.example.com/careers/devops",
+    "postedDate": "2026-09-26"
+  },
+  {
+    "title": "Cloud Engineer",
+    "company": "StratusWave Systems",
+    "location": "Atlanta, GA (Hybrid)",
+    "type": "Full-time",
+    "salary": "$125,000 - $155,000",
+    "description": "StratusWave helps enterprise companies migrate legacy monoliths to secure, scalable cloud architectures on AWS and Azure. You will implement cloud networking, IAM policies, and serverless compute pipelines.",
+    "responsibilities": [
+      "Architect secure, highly available cloud environments on AWS and Azure",
+      "Implement Infrastructure as Code with Terraform and CloudFormation",
+      "Configure VPC networks, subnets, load balancers, and security groups",
+      "Collaborate with security engineers to ensure compliance and cost governance"
+    ],
+    "requiredSkills": ["AWS", "Azure", "Linux", "Docker", "Git", "Bash"],
+    "preferredSkills": ["Kubernetes", "Terraform", "Python", "GCP"],
+    "experience": "Mid Level (2-4 years)",
+    "education": "Bachelor's degree in Computer Science, IT, or relevant certifications (AWS Certified Solutions Architect)",
+    "applicationUrl": "https://stratuswave.example.com/careers/cloud-engineer",
+    "postedDate": "2026-09-28"
+  },
+  {
+    "title": "Cybersecurity Analyst",
+    "company": "ShieldPoint Defense",
+    "location": "Washington, DC (Hybrid)",
+    "type": "Full-time",
+    "salary": "$110,000 - $140,000",
+    "description": "Protect critical infrastructure with ShieldPoint. We are looking for a dedicated Cybersecurity Analyst to monitor network security, analyze vulnerability scans, and implement threat prevention strategies.",
+    "responsibilities": [
+      "Monitor SIEM alerts and investigate potential security incidents",
+      "Conduct regular vulnerability assessments and penetration testing reviews",
+      "Audit access permissions, IAM configurations, and cloud security postures",
+      "Develop incident response runbooks and conduct security awareness drills"
+    ],
+    "requiredSkills": ["Linux", "Python", "Git", "SQL", "Problem Solving"],
+    "preferredSkills": ["AWS", "Docker", "Bash", "Network Security", "SIEM"],
+    "experience": "Mid Level (2-4 years)",
+    "education": "Bachelor's in Cybersecurity, Computer Science, or Security+ / CISSP certifications",
+    "applicationUrl": "https://shieldpoint.example.com/careers/cyber-analyst",
+    "postedDate": "2026-09-29"
+  },
+  {
+    "title": "Junior Full Stack Engineer",
+    "company": "Seedling Digital",
+    "location": "San Jose, CA (Remote)",
+    "type": "Full-time",
+    "salary": "$90,000 - $115,000",
+    "description": "Kickstart your software engineering career with Seedling Digital! You will work under senior engineers building customer-facing web apps with React, Node.js, and MongoDB.",
+    "responsibilities": [
+      "Implement user interface components from wireframes using React",
+      "Write API routes and handle database queries with Node.js and MongoDB",
+      "Write unit tests and debug client and server issues",
+      "Participate in daily standups and agile sprint reviews"
+    ],
+    "requiredSkills": ["JavaScript", "React", "Node.js", "HTML", "CSS", "Git"],
+    "preferredSkills": ["TypeScript", "MongoDB", "Express", "Tailwind CSS"],
+    "experience": "Entry Level (0-2 years)",
+    "education": "Bachelor's in CS, Software Engineering, or Coding Bootcamp Graduate",
+    "applicationUrl": "https://seedling.example.com/careers/junior-fullstack",
+    "postedDate": "2026-10-01"
+  },
+  {
+    "title": "Senior Backend Architect",
+    "company": "ScaleMatrix Global",
+    "location": "New York, NY (Hybrid)",
+    "type": "Full-time",
+    "salary": "$175,000 - $210,000",
+    "description": "Lead the backend architecture for high-velocity payment processing engines. You will design distributed systems with Node.js, Go/Python, PostgreSQL, Redis, and Kafka.",
+    "responsibilities": [
+      "Establish architectural guidelines for microservices and event-driven systems",
+      "Optimize relational and cache databases for sub-millisecond query responses",
+      "Mentor mid-level engineers and lead technical design document reviews",
+      "Ensure 99.99% system uptime through automated failover and telemetry"
+    ],
+    "requiredSkills": ["Node.js", "PostgreSQL", "Redis", "Docker", "REST API", "Microservices", "Git"],
+    "preferredSkills": ["Kubernetes", "AWS", "TypeScript", "Python"],
+    "experience": "Senior (5+ years)",
+    "education": "Bachelor's or Master's in Computer Science",
+    "applicationUrl": "https://scalematrix.example.com/careers/senior-backend",
+    "postedDate": "2026-10-02"
+  },
+  {
+    "title": "NLP Research Engineer",
+    "company": "LinguisticAI",
+    "location": "San Francisco, CA (Remote)",
+    "type": "Full-time",
+    "salary": "$155,000 - $195,000",
+    "description": "LinguisticAI is developing domain-specific language models for clinical and financial documentation. You will extract entities, train transformer models, and optimize tokenizers.",
+    "responsibilities": [
+      "Build entity extraction and classification models with spaCy, NLTK, and Hugging Face",
+      "Implement TF-IDF, vector embeddings, and similarity metrics for document ranking",
+      "Deploy scalable NLP inference pipelines using FastAPI and PyTorch",
+      "Publish internal research benchmarks and evaluate model hallucination rates"
+    ],
+    "requiredSkills": ["Python", "Natural Language Processing", "NLP", "PyTorch", "Scikit-learn", "Git"],
+    "preferredSkills": ["FastAPI", "Docker", "Pandas", "NumPy", "Hugging Face"],
+    "experience": "Mid-Senior (3-5 years)",
+    "education": "Master's or PhD in Computational Linguistics, CS, or AI",
+    "applicationUrl": "https://linguistic-ai.example.com/careers/nlp-researcher",
+    "postedDate": "2026-09-19"
+  },
+  {
+    "title": "Cloud DevOps Specialist",
+    "company": "Vanguard Cloud Ops",
+    "location": "Dallas, TX (Remote)",
+    "type": "Full-time",
+    "salary": "$130,000 - $160,000",
+    "description": "Help our clients transition smoothly into multi-cloud environments. You will write reusable Terraform modules, implement GitOps with ArgoCD, and secure Docker containers in Kubernetes.",
+    "responsibilities": [
+      "Manage multi-account AWS and Azure infrastructure via Terraform",
+      "Build resilient CI/CD pipelines with GitHub Actions",
+      "Enforce least-privilege security policies and container vulnerability scanning",
+      "Troubleshoot distributed network and DNS issues across environments"
+    ],
+    "requiredSkills": ["AWS", "Docker", "Kubernetes", "Linux", "Git", "CI/CD"],
+    "preferredSkills": ["Terraform", "Azure", "Python", "Bash", "Prometheus"],
+    "experience": "Mid Level (3-5 years)",
+    "education": "Bachelor's in CS, IT, or equivalent experience",
+    "applicationUrl": "https://vanguardcloud.example.com/jobs/cloud-devops",
+    "postedDate": "2026-09-23"
+  },
+  {
+    "title": "Python Backend Engineer",
+    "company": "Pyramid Data Labs",
+    "location": "Boston, MA (Hybrid)",
+    "type": "Full-time",
+    "salary": "$120,000 - $150,000",
+    "description": "Build high-performance web APIs and analytical backends with Python, FastAPI, Django, and PostgreSQL. You will design data ingestion pipelines and integrate third-party services.",
+    "responsibilities": [
+      "Develop asynchronous REST APIs using FastAPI and Pydantic",
+      "Design database models and execute migrations with SQLAlchemy/Alembic",
+      "Implement background tasks with Celery/Redis",
+      "Write comprehensive pytest test suites for backend services"
+    ],
+    "requiredSkills": ["Python", "FastAPI", "PostgreSQL", "REST API", "Git", "Docker"],
+    "preferredSkills": ["Django", "Redis", "AWS", "Pandas"],
+    "experience": "Mid Level (2-4 years)",
+    "education": "Bachelor's in Computer Science or Software Engineering",
+    "applicationUrl": "https://pyramidlabs.example.com/careers/python-backend",
+    "postedDate": "2026-09-17"
+  },
+  {
+    "title": "Frontend UI/UX Engineer",
+    "company": "Canvas Interactive",
+    "location": "Los Angeles, CA (Remote)",
+    "type": "Full-time",
+    "salary": "$115,000 - $145,000",
+    "description": "Create engaging, visually stunning user interfaces for creative applications. You will bridge design and engineering using React, Tailwind CSS, and Framer Motion.",
+    "responsibilities": [
+      "Develop responsive and delightful web experiences with React and TypeScript",
+      "Implement micro-interactions and smooth page transitions",
+      "Collaborate with UX designers to build and document our design system",
+      "Optimize performance for mobile and low-bandwidth users"
+    ],
+    "requiredSkills": ["React", "JavaScript", "TypeScript", "Tailwind CSS", "HTML", "CSS", "Git"],
+    "preferredSkills": ["Next.js", "Redux", "Figma", "WebSockets"],
+    "experience": "Mid Level (2-4 years)",
+    "education": "Bachelor's degree or strong portfolio of creative web projects",
+    "applicationUrl": "https://canvasinteractive.example.com/careers/ui-ux-engineer",
+    "postedDate": "2026-09-26"
+  },
+  {
+    "title": "Data Platform Engineer",
+    "company": "StreamByte Corp",
+    "location": "New York, NY (Hybrid)",
+    "type": "Full-time",
+    "salary": "$140,000 - $175,000",
+    "description": "Build real-time data ingestion pipelines connecting streaming analytics to customer dashboards. You will work with Python, SQL, Kafka, Snowflake, and PostgreSQL.",
+    "responsibilities": [
+      "Design and maintain scalable ETL pipelines using Python and SQL",
+      "Manage data warehouse models in Snowflake and PostgreSQL",
+      "Ensure data quality, lineage tracking, and schema migrations",
+      "Collaborate with Data Scientists to prepare curated feature stores"
+    ],
+    "requiredSkills": ["Python", "SQL", "Data Engineering", "PostgreSQL", "Git", "Docker"],
+    "preferredSkills": ["Spark", "AWS", "Redis", "Snowflake"],
+    "experience": "Mid-Senior (3-5 years)",
+    "education": "Bachelor's in CS, Information Systems, or Data Science",
+    "applicationUrl": "https://streambyte.example.com/careers/data-platform",
+    "postedDate": "2026-09-27"
+  },
+  {
+    "title": "Computer Vision AI Engineer",
+    "company": "Visionary Robotics",
+    "location": "Pittsburgh, PA (Onsite)",
+    "type": "Full-time",
+    "salary": "$145,000 - $185,000",
+    "description": "Develop perception algorithms for autonomous robotic systems. You will implement object detection, segmentation, and tracking pipelines using PyTorch, OpenCV, and C++/Python.",
+    "responsibilities": [
+      "Train computer vision models with PyTorch and TensorFlow",
+      "Optimize neural networks for embedded edge devices using TensorRT",
+      "Develop synthetic data generation tools for rare robotic edge cases",
+      "Integrate perception nodes into ROS2 and test on physical hardware"
+    ],
+    "requiredSkills": ["Python", "Computer Vision", "PyTorch", "Machine Learning", "NumPy", "Git"],
+    "preferredSkills": ["C++", "TensorFlow", "Docker", "Linux", "OpenCV"],
+    "experience": "Mid-Senior (3-5 years)",
+    "education": "Master's or Bachelor's in Robotics, Electrical Engineering, or CS",
+    "applicationUrl": "https://visionaryrobotics.example.com/careers/cv-engineer",
+    "postedDate": "2026-09-20"
+  },
+  {
+    "title": "Site Reliability Engineer",
+    "company": "Uptime Guard",
+    "location": "Chicago, IL (Remote)",
+    "type": "Full-time",
+    "salary": "$135,000 - $165,000",
+    "description": "Ensure resilience, scalability, and disaster recovery for millions of daily active users. You will write automation scripts, manage Kubernetes clusters, and troubleshoot distributed systems.",
+    "responsibilities": [
+      "Define and track Service Level Objectives (SLOs) and Error Budgets",
+      "Automate infrastructure provisioning using Terraform and Ansible",
+      "Lead incident post-mortems and engineer blameless systemic solutions",
+      "Implement automated canary deployments and zero-downtime rollouts"
+    ],
+    "requiredSkills": ["Linux", "Kubernetes", "Docker", "AWS", "Git", "CI/CD"],
+    "preferredSkills": ["Python", "Prometheus", "Grafana", "Go", "Terraform"],
+    "experience": "Mid-Senior (3-5 years)",
+    "education": "Bachelor's in Computer Science or equivalent operational experience",
+    "applicationUrl": "https://uptimeguard.example.com/careers/sre",
+    "postedDate": "2026-09-25"
+  },
+  {
+    "title": "React Native Mobile Developer",
+    "company": "Mobility Hub",
+    "location": "Miami, FL (Hybrid)",
+    "type": "Full-time",
+    "salary": "$115,000 - $145,000",
+    "description": "Build high-performance cross-platform mobile apps for iOS and Android using React Native, TypeScript, and modern state management.",
+    "responsibilities": [
+      "Develop and release iOS and Android apps using React Native",
+      "Integrate RESTful and GraphQL APIs for real-time mobile tracking",
+      "Optimize native bridging, animations, and offline storage caching",
+      "Maintain app store deployments and continuous integration pipelines"
+    ],
+    "requiredSkills": ["React", "JavaScript", "TypeScript", "REST API", "Git"],
+    "preferredSkills": ["Redux", "Node.js", "HTML", "CSS", "Tailwind CSS"],
+    "experience": "Mid Level (2-4 years)",
+    "education": "Bachelor's degree or equivalent software development experience",
+    "applicationUrl": "https://mobilityhub.example.com/careers/mobile-dev",
+    "postedDate": "2026-09-22"
+  },
+  {
+    "title": "Information Security Specialist",
+    "company": "Aegis Cyber Defense",
+    "location": "Reston, VA (Onsite)",
+    "type": "Full-time",
+    "salary": "$125,000 - $155,000",
+    "description": "Conduct threat hunting, incident triage, and cloud security compliance for high-security government and commercial clients.",
+    "responsibilities": [
+      "Perform continuous threat intelligence monitoring and vulnerability management",
+      "Conduct security audits of AWS and Azure cloud architectures",
+      "Implement zero-trust network access (ZTNA) and identity policies",
+      "Automate security testing in CI/CD pipelines"
+    ],
+    "requiredSkills": ["Linux", "Python", "Problem Solving", "Git"],
+    "preferredSkills": ["AWS", "Docker", "SQL", "Network Security"],
+    "experience": "Mid Level (3-5 years)",
+    "education": "Bachelor's in Cybersecurity or Computer Science",
+    "applicationUrl": "https://aegisdefense.example.com/careers/infosec",
+    "postedDate": "2026-09-28"
+  },
+  {
+    "title": "Junior Data Analyst",
+    "company": "BrightMetrics",
+    "location": "Phoenix, AZ (Remote)",
+    "type": "Full-time",
+    "salary": "$65,000 - $80,000",
+    "description": "Join our business intelligence team to create reports, validate data integrity, and build clean dashboards using SQL and Excel.",
+    "responsibilities": [
+      "Write basic to intermediate SQL queries to retrieve data from relational databases",
+      "Build Excel pivot tables, charts, and automated formulas",
+      "Create clean visualizations in Tableau or Power BI",
+      "Assist senior analysts in data preparation and weekly report generation"
+    ],
+    "requiredSkills": ["SQL", "Excel", "Data Analysis", "Communication"],
+    "preferredSkills": ["Python", "Power BI", "Tableau"],
+    "experience": "Entry Level (0-2 years)",
+    "education": "Bachelor's in Business Analytics, Mathematics, Economics, or CS",
+    "applicationUrl": "https://brightmetrics.example.com/careers/jr-analyst",
+    "postedDate": "2026-10-01"
+  },
+  {
+    "title": "Senior React Frontend Architect",
+    "company": "Hyperion Web Studios",
+    "location": "San Francisco, CA (Remote)",
+    "type": "Full-time",
+    "salary": "$165,000 - $195,000",
+    "description": "Lead frontend technical direction across our suite of collaborative productivity tools. You will architect micro-frontends, manage design system libraries, and mentor engineering teams.",
+    "responsibilities": [
+      "Architect large-scale TypeScript and React applications",
+      "Establish best practices for state management, testing, and component composition",
+      "Collaborate with product leaders to deliver snappy, intuitive experiences",
+      "Drive web performance optimization and Core Web Vitals"
+    ],
+    "requiredSkills": ["React", "JavaScript", "TypeScript", "HTML", "CSS", "Tailwind CSS", "Git"],
+    "preferredSkills": ["Next.js", "Node.js", "GraphQL", "Redux"],
+    "experience": "Senior (5+ years)",
+    "education": "Bachelor's or Master's in Computer Science",
+    "applicationUrl": "https://hyperionstudios.example.com/careers/lead-frontend",
+    "postedDate": "2026-09-30"
+  },
+  {
+    "title": "Lead MLOps Engineer",
+    "company": "TensorGrid Cloud",
+    "location": "Austin, TX (Remote)",
+    "type": "Full-time",
+    "salary": "$170,000 - $215,000",
+    "description": "TensorGrid operates scalable GPU clusters for machine learning teams. As Lead MLOps Engineer, you will build automated training pipelines, model registries, and inference clusters.",
+    "responsibilities": [
+      "Design end-to-end MLOps pipelines using MLflow, Kubeflow, and Docker",
+      "Deploy low-latency model inference servers with FastAPI and Triton",
+      "Scale Kubernetes GPU clusters on AWS and GCP",
+      "Implement model drift detection and automated re-training workflows"
+    ],
+    "requiredSkills": ["Python", "Docker", "Kubernetes", "Machine Learning", "AWS", "Git", "CI/CD"],
+    "preferredSkills": ["FastAPI", "PyTorch", "TensorFlow", "Scikit-learn", "GCP"],
+    "experience": "Senior (5+ years)",
+    "education": "Bachelor's or Master's in CS, Software Engineering, or related",
+    "applicationUrl": "https://tensorgrid.example.com/careers/lead-mlops",
+    "postedDate": "2026-09-29"
+  },
+  {
+    "title": "Backend API Developer",
+    "company": "Apex Gateway",
+    "location": "San Diego, CA (Hybrid)",
+    "type": "Full-time",
+    "salary": "$115,000 - $140,000",
+    "description": "Develop and maintain public and partner API endpoints for healthcare and telehealth platforms. You will write secure, compliant Node.js and Express services with MongoDB and Redis.",
+    "responsibilities": [
+      "Build RESTful and GraphQL endpoints with Node.js and Express",
+      "Implement authentication and authorization using JWT and OAuth2",
+      "Write data models and aggregations in MongoDB with Mongoose",
+      "Optimize response times with Redis caching and query indexing"
+    ],
+    "requiredSkills": ["Node.js", "Express", "MongoDB", "REST API", "Git", "JavaScript"],
+    "preferredSkills": ["TypeScript", "Redis", "Docker", "AWS"],
+    "experience": "Mid Level (2-4 years)",
+    "education": "Bachelor's in CS, IT, or equivalent industry experience",
+    "applicationUrl": "https://apexgateway.example.com/careers/api-dev",
+    "postedDate": "2026-09-27"
+  },
+  {
+    "title": "AI & Deep Learning Specialist",
+    "company": "NeuraSync",
+    "location": "Seattle, WA (Remote)",
+    "type": "Full-time",
+    "salary": "$155,000 - $190,000",
+    "description": "NeuraSync builds multimodal foundation models for voice and text understanding. We are looking for a deep learning specialist to train acoustic models and transformer architectures.",
+    "responsibilities": [
+      "Train transformer architectures with PyTorch on multi-GPU setups",
+      "Perform data curation, cleaning, and augmentation with NumPy and Pandas",
+      "Evaluate speech and language models with standard NLP benchmarks",
+      "Collaborate with software engineers to optimize inference latencies"
+    ],
+    "requiredSkills": ["Python", "PyTorch", "Deep Learning", "Machine Learning", "Natural Language Processing", "Git"],
+    "preferredSkills": ["TensorFlow", "FastAPI", "Docker", "Pandas", "NumPy"],
+    "experience": "Mid-Senior (3-5 years)",
+    "education": "Master's or PhD in Computer Science, Machine Learning, or AI",
+    "applicationUrl": "https://neurasync.example.com/careers/dl-specialist",
+    "postedDate": "2026-09-23"
+  },
+  {
+    "title": "Full Stack Cloud Engineer",
+    "company": "Skyline Enterprise",
+    "location": "Charlotte, NC (Hybrid)",
+    "type": "Full-time",
+    "salary": "$130,000 - $160,000",
+    "description": "Work across both application logic and cloud infrastructure. You will write React frontends, Node/Express backends, and automate AWS cloud resources.",
+    "responsibilities": [
+      "Build responsive web applications using React and Tailwind CSS",
+      "Develop scalable Node.js services connected to PostgreSQL databases",
+      "Manage cloud deployments using Docker, AWS ECS, and GitHub Actions",
+      "Maintain comprehensive integration and unit test coverage"
+    ],
+    "requiredSkills": ["JavaScript", "TypeScript", "React", "Node.js", "AWS", "Git"],
+    "preferredSkills": ["Docker", "PostgreSQL", "Tailwind CSS", "CI/CD"],
+    "experience": "Mid Level (3-5 years)",
+    "education": "Bachelor's in CS, Computer Engineering, or related degree",
+    "applicationUrl": "https://skylinecloud.example.com/careers/fullstack-cloud",
+    "postedDate": "2026-09-26"
+  },
+  {
+    "title": "Quantitative Data Analyst",
+    "company": "Vantage Point Capital",
+    "location": "New York, NY (Onsite)",
+    "type": "Full-time",
+    "salary": "$125,000 - $160,000",
+    "description": "Analyze equity, fixed income, and commodities market structures. You will write complex SQL and Python routines to evaluate algorithmic trade execution metrics.",
+    "responsibilities": [
+      "Extract and analyze high-frequency trading datasets using Python and SQL",
+      "Compute financial risk metrics, Sharpe ratios, and drawdown analysis",
+      "Build automated reporting dashboards with Tableau and Excel",
+      "Partner with portfolio managers to backtest trading hypotheses"
+    ],
+    "requiredSkills": ["Python", "SQL", "Data Analysis", "Statistics", "Excel"],
+    "preferredSkills": ["Pandas", "NumPy", "Tableau", "Git"],
+    "experience": "Mid Level (2-4 years)",
+    "education": "Bachelor's in Financial Engineering, Mathematics, Statistics, or CS",
+    "applicationUrl": "https://vantagepointcap.example.com/careers/quant-analyst",
+    "postedDate": "2026-09-28"
+  },
+  {
+    "title": "Software Engineer in Test (SDET)",
+    "company": "QualityCraft Software",
+    "location": "Minneapolis, MN (Remote)",
+    "type": "Full-time",
+    "salary": "$110,000 - $135,000",
+    "description": "Design automated test frameworks for end-to-end web and API testing. You will collaborate with developers to ensure zero-regression releases.",
+    "responsibilities": [
+      "Build automated UI and API test suites using Playwright, Jest, and Python",
+      "Integrate automated test runs into GitHub Actions CI/CD workflows",
+      "Perform load and stress testing on backend microservices",
+      "Document test cases, bug reports, and quality metrics"
+    ],
+    "requiredSkills": ["Python", "JavaScript", "Git", "REST API", "CI/CD"],
+    "preferredSkills": ["Docker", "Node.js", "React", "Linux"],
+    "experience": "Mid Level (2-4 years)",
+    "education": "Bachelor's in Computer Science or equivalent technical field",
+    "applicationUrl": "https://qualitycraft.example.com/careers/sdet",
+    "postedDate": "2026-09-21"
+  },
+  {
+    "title": "Cloud Security Engineer",
+    "company": "Fortress Cloud Security",
+    "location": "Salt Lake City, UT (Remote)",
+    "type": "Full-time",
+    "salary": "$135,000 - $170,000",
+    "description": "Design and enforce security architectures across multi-tenant AWS and GCP environments. You will implement automated compliance auditing, secret management, and identity governance.",
+    "responsibilities": [
+      "Automate cloud security scanning and posture management (CSPM)",
+      "Configure IAM roles, KMS encryption, and network firewalls on AWS",
+      "Audit container images and Helm charts for Common Vulnerabilities and Exposures (CVEs)",
+      "Lead incident responses for security anomalies in cloud clusters"
+    ],
+    "requiredSkills": ["AWS", "Linux", "Docker", "Git", "Problem Solving"],
+    "preferredSkills": ["GCP", "Kubernetes", "Python", "Terraform", "CI/CD"],
+    "experience": "Mid-Senior (3-5 years)",
+    "education": "Bachelor's degree in Cybersecurity, CS, or industry certifications (AWS Certified Security Specialty)",
+    "applicationUrl": "https://fortresscloud.example.com/careers/sec-engineer",
+    "postedDate": "2026-09-29"
+  },
+  {
+    "title": "Senior Data Scientist - NLP & LLM",
+    "company": "Cognitive Stream Labs",
+    "location": "San Francisco, CA (Hybrid)",
+    "type": "Full-time",
+    "salary": "$165,000 - $205,000",
+    "description": "Lead our NLP intelligence team developing automated summarization, question answering, and semantic resume matching systems.",
+    "responsibilities": [
+      "Develop document similarity algorithms using TF-IDF, Word2Vec, and dense vector embeddings",
+      "Fine-tune open-source LLMs using LoRA and PEFT techniques",
+      "Evaluate model ranking metrics including cosine similarity and NDCG",
+      "Collaborate with product and engineering teams to deploy models to production"
+    ],
+    "requiredSkills": ["Python", "Natural Language Processing", "NLP", "Machine Learning", "Scikit-learn", "PyTorch", "Pandas"],
+    "preferredSkills": ["FastAPI", "Docker", "LangChain", "SQL", "Git"],
+    "experience": "Senior (5+ years)",
+    "education": "Master's or PhD in Computer Science, Data Science, or related field",
+    "applicationUrl": "https://cognitivestream.example.com/careers/senior-ds-nlp",
+    "postedDate": "2026-10-02"
+  }
+]
