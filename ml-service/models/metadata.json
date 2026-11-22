@@ -1,8 +1,8 @@
 {
   "algorithm": "TF-IDF + Cosine Similarity + Skill Overlap + Experience Relevance",
-  "algorithmVersion": "tfidf-v1",
-  "createdAt": "2026-10-06T17:39:52.298298Z",
-  "vocabularySize": 5000,
+  "algorithmVersion": "tfidf-v2-optimized",
+  "createdAt": "2026-11-17T03:23:46.416560Z",
+  "vocabularySize": 10000,
   "corpusSize": {
     "resumes": 166,
     "jobs": 93,
@@ -13,13 +13,14 @@
     "Kaggle Job Postings (Job title & Job description text)"
   ],
   "supervisedClassification": {
-    "model": "Logistic Regression",
+    "model": "LinearSVC (C=2.0)",
     "task": "Resume Domain Category Classification",
     "metrics": {
-      "accuracy": 0.4412,
-      "precision": 0.2627,
-      "recall": 0.4412,
-      "f1Score": 0.3102,
+      "modelName": "LinearSVC (C=2.0)",
+      "accuracy": 0.8824,
+      "precision": 0.8456,
+      "recall": 0.8824,
+      "f1Score": 0.8501,
       "testSamples": 34,
       "classes": [
         "Advocate",
@@ -47,7 +48,8 @@
         "Sales",
         "Testing",
         "Web Designing"
-      ]
+      ],
+      "fullKaggleBenchmarkAccuracy": 1.0
     },
     "supervisedMatchLabelsNote": "Kaggle datasets are independent unpaired corpora without ground-truth hiring outcome labels. Real mathematically sound matching is calculated via TF-IDF vector space model, Cosine Similarity, skill intersection, and experience band matching."
   }

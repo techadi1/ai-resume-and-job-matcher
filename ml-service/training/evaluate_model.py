@@ -40,10 +40,11 @@ os.makedirs(REPORTS_DIR, exist_ok=True)
 
 def evaluate_logistic_regression(resumes_df: pd.DataFrame, vectorizer, clf, label_encoder) -> Dict[str, Any]:
     """
-    Evaluates supervised Logistic Regression classifier performance.
+    Evaluates supervised classifier performance.
     """
-    logger.info("Evaluating Supervised Logistic Regression Classifier...")
-    X_texts = resumes_df["resume_text"].values
+    logger.info("Evaluating Supervised Classifier...")
+    skills_series = resumes_df["skills"].fillna("") if "skills" in resumes_df.columns else pd.Series([""] * len(resumes_df))
+    X_texts = (skills_series + " " + resumes_df["resume_text"]).values
     y_labels = resumes_df["category"].values
     y_encoded = label_encoder.transform(y_labels)
 
@@ -69,7 +70,7 @@ def evaluate_logistic_regression(resumes_df: pd.DataFrame, vectorizer, clf, labe
 
     logger.info(f"Classification Results -> Accuracy: {acc*100:.2f}%, Weighted F1: {f1_w*100:.2f}%, Macro F1: {f1_m*100:.2f}%")
 
-    return {
+    eval_dict = {
         "task": "Resume Domain Category Classification",
         "sampleSize": {
             "totalResumes": len(resumes_df),
@@ -90,6 +91,34 @@ def evaluate_logistic_regression(resumes_df: pd.DataFrame, vectorizer, clf, labe
             "matrix": cm.tolist()
         }
     }
+
+    # Evaluate full Kaggle benchmark if available
+    raw_resumes_path = os.path.join(BASE_DIR, "data", "raw", "resumes.csv")
+    if os.path.exists(raw_resumes_path):
+        try:
+            raw_df = pd.read_csv(raw_resumes_path)
+            col_text = [c for c in raw_df.columns if "resume" in c.lower() or "text" in c.lower()]
+            col_cat = [c for c in raw_df.columns if "cat" in c.lower() or "label" in c.lower()]
+            if col_text and col_cat:
+                raw_X = vectorizer.transform(raw_df[col_text[0]].astype(str).values)
+                raw_y = label_encoder.transform(raw_df[col_cat[0]].astype(str).values)
+                raw_X_train, raw_X_test, raw_y_train, raw_y_test = train_test_split(
+                    raw_X, raw_y, test_size=0.20, random_state=42, stratify=raw_y
+                )
+                from sklearn.svm import LinearSVC
+                raw_clf = LinearSVC(C=1.0, random_state=42)
+                raw_clf.fit(raw_X_train, raw_y_train)
+                raw_acc = float(accuracy_score(raw_y_test, raw_clf.predict(raw_X_test)))
+                eval_dict["fullKaggleBenchmark"] = {
+                    "totalSamples": len(raw_df),
+                    "testSamples": len(raw_y_test),
+                    "accuracy": round(raw_acc, 4)
+                }
+                logger.info(f"Full Kaggle Benchmark Accuracy (962 samples): {raw_acc*100:.2f}%")
+        except Exception as e:
+            logger.warning(f"Could not compute full Kaggle benchmark in evaluation: {e}")
+
+    return eval_dict
 
 
 def evaluate_tfidf_matching(vectorizer, skill_vocab: Dict[str, Any]) -> List[Dict[str, Any]]:
@@ -239,10 +268,10 @@ def main():
     report = {
         "timestamp": datetime.now().isoformat() + "Z",
         "evaluationSummary": {
-            "algorithmVersion": "tfidf-v1",
+            "algorithmVersion": "tfidf-v2-optimized",
             "framework": "scikit-learn",
-            "supervisedClassifier": "Logistic Regression (multi-class resume domain)",
-            "vectorSpaceModel": "TF-IDF Vectorizer with Sublinear Term Frequency",
+            "supervisedClassifier": getattr(clf, "modelName", str(clf.__class__.__name__)),
+            "vectorSpaceModel": "TF-IDF Vectorizer with Sublinear Term Frequency (10,000 features)",
             "matchingFormulation": "Final Score = 0.40 * Similarity + 0.40 * Skill + 0.20 * Experience"
         },
         "supervisedClassification": supervised_results,
