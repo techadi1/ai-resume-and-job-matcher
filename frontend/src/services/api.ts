@@ -1,14 +1,15 @@
 import axios from "axios";
 
 const getApiBaseUrl = () => {
-  if (import.meta.env.VITE_API_URL && !/localhost|127\.0\.0\.1/.test(import.meta.env.VITE_API_URL)) return import.meta.env.VITE_API_URL;
-  if (import.meta.env.VITE_API_BASE_URL) return import.meta.env.VITE_API_BASE_URL;
   if (typeof window !== "undefined") {
     const host = window.location.hostname;
     if (host !== "localhost" && host !== "127.0.0.1") {
       // Production deployment (e.g. Vercel) -> same-origin serverless API
       return "/api";
     }
+  }
+  if (import.meta.env.VITE_API_BASE_URL && !/localhost|127\.0\.0\.1/.test(import.meta.env.VITE_API_BASE_URL)) {
+    return import.meta.env.VITE_API_BASE_URL;
   }
   return "http://localhost:5001/api";
 };

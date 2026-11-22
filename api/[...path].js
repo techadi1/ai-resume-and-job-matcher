@@ -206,12 +206,17 @@ async function parseBody(req) {
   if (typeof req.body === 'string') {
     try { return JSON.parse(req.body); } catch (_) { return {}; }
   }
+  if (req.readableEnded) return {};
   return new Promise((resolve) => {
     let data = '';
     req.on('data', chunk => { data += chunk; });
     req.on('end', () => {
       try { resolve(JSON.parse(data)); } catch (_) { resolve({}); }
     });
+    req.on('error', () => resolve({}));
+    setTimeout(() => {
+      try { resolve(data ? JSON.parse(data) : {}); } catch (_) { resolve({}); }
+    }, 1500);
   });
 }
 
@@ -226,9 +231,41 @@ module.exports = async function handler(req, res) {
     return res.status(200).end();
   }
 
-  const url = new URL(req.url, `http://${req.headers.host || 'localhost'}`);
-  let pathname = url.pathname.replace(/^\/api\/v1/, '').replace(/^\/api/, '');
+  // Determine path robustly across Vercel rewrite, catch-all [...path], and direct routes
+  let pathname = '';
+  if (req.query && req.query.path) {
+    if (Array.isArray(req.query.path)) {
+      pathname = '/' + req.query.path.join('/');
+    } else {
+      pathname = '/' + req.query.path;
+    }
+  } else {
+    const rawPath = req.headers['x-vercel-original-path'] || req.headers['x-matched-path'] || req.url || '/';
+    try {
+      const parsed = new URL(rawPath, `http://${req.headers.host || 'localhost'}`);
+      pathname = parsed.pathname;
+    } catch (_) {
+      pathname = rawPath.split('?')[0];
+    }
+  }
+
+  // Normalize path
+  pathname = pathname.replace(/^\/api\/v1/, '').replace(/^\/api/, '');
   if (!pathname.startsWith('/')) pathname = '/' + pathname;
+  if (pathname.length > 1 && pathname.endsWith('/')) pathname = pathname.slice(0, -1);
+
+  // Helper for query parameters
+  const getParam = (name) => {
+    if (req.query && req.query[name] !== undefined) {
+      return Array.isArray(req.query[name]) ? req.query[name][0] : req.query[name];
+    }
+    try {
+      const u = new URL(req.url, `http://${req.headers.host || 'localhost'}`);
+      return u.searchParams.get(name) || '';
+    } catch (_) {
+      return '';
+    }
+  };
 
   console.log(`[Vercel Serverless] ${req.method} ${pathname}`);
 
@@ -307,12 +344,12 @@ module.exports = async function handler(req, res) {
 
     // 5. Jobs: Get all / search / filter
     if (pathname === '/jobs' && req.method === 'GET') {
-      const search = (url.searchParams.get('search') || '').toLowerCase();
-      const skill = (url.searchParams.get('skill') || '').toLowerCase();
-      const location = (url.searchParams.get('location') || '').toLowerCase();
-      const type = (url.searchParams.get('type') || '').toLowerCase();
-      const page = parseInt(url.searchParams.get('page') || '1', 10);
-      const limit = parseInt(url.searchParams.get('limit') || '12', 10);
+      const search = (getParam('search') || '').toLowerCase();
+      const skill = (getParam('skill') || '').toLowerCase();
+      const location = (getParam('location') || '').toLowerCase();
+      const type = (getParam('type') || '').toLowerCase();
+      const page = parseInt(getParam('page') || '1', 10);
+      const limit = parseInt(getParam('limit') || '12', 10);
 
       let filtered = JOBS_DATA.filter(j => {
         if (search && !j.title.toLowerCase().includes(search) && !j.company.toLowerCase().includes(search) && !(j.description || '').toLowerCase().includes(search)) {
@@ -573,12 +610,14 @@ module.exports = async function handler(req, res) {
     // Fallback 404
     return res.status(404).json({
       success: false,
+      message: `Route ${pathname} not found on serverless API`,
       error: { code: 'NOT_FOUND', message: `Route ${pathname} not found on serverless API` }
     });
   } catch (error) {
     console.error('Serverless API Error:', error);
     return res.status(500).json({
       success: false,
+      message: error.message || 'Internal Server Error',
       error: { code: 'INTERNAL_ERROR', message: error.message }
     });
   }

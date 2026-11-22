@@ -39,10 +39,15 @@ export const RegisterPage: React.FC = () => {
       success("Account Created!", "Welcome to ResumeMatch.");
       navigate("/dashboard");
     } catch (err: any) {
-      let msg = err.response?.data?.message || err.response?.data?.detail;
+      let msg =
+        err.response?.data?.message ||
+        err.response?.data?.error?.message ||
+        err.response?.data?.detail;
       if (!msg) {
         if (!err.response || err.code === "ERR_NETWORK") {
           msg = "Unable to connect to server. Please verify the backend is running.";
+        } else if (err.response?.data && typeof err.response.data === "string") {
+          msg = err.response.data;
         } else {
           msg = "Registration failed. Please check your details and try again.";
         }
