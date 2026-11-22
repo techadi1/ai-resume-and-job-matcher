@@ -43,3 +43,4 @@ frontend/dist/
 
 # Deprecated / Scratch
 _old_python_backend/
+.vercel
