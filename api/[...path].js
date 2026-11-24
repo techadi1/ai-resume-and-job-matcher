@@ -245,6 +245,7 @@ module.exports = async function handler(req, res) {
 
   // Normalize path
   pathname = pathname.replace(/^\/api\/v1/, '').replace(/^\/api/, '');
+  pathname = pathname.replace(/^\/index\.js/, '');
   if (!pathname.startsWith('/')) pathname = '/' + pathname;
   if (pathname.length > 1 && pathname.endsWith('/')) pathname = pathname.slice(0, -1);
 
