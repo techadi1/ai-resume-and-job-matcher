@@ -41,7 +41,10 @@ const inMemoryStore = {
       bio: 'Software engineer passionate about AI, cloud architecture, and high-performance web systems.'
     }
   ],
-  savedJobs: new Set(),
+  // Per-user saved jobs: { [userId]: Set<jobId> }
+  userSavedJobs: {
+    'usr_default_aditya': new Set()
+  },
   resumes: [
     {
       id: 'res_sample_01',
@@ -178,20 +181,85 @@ function calculateMatches(userSkills, userText) {
   }).sort((a, b) => b.matchPercentage - a.matchPercentage);
 }
 
+const JWT_SECRET = 'careerai_production_secret_key_2026';
+
 // Token helper (HMAC-SHA256)
 function generateToken(user) {
   const header = Buffer.from(JSON.stringify({ alg: 'HS256', typ: 'JWT' })).toString('base64url');
   const payload = Buffer.from(JSON.stringify({
     sub: user.id,
+    id: user.id,
     email: user.email,
-    role: user.role,
+    name: user.name,
+    role: user.role || 'USER',
     iat: Math.floor(Date.now() / 1000),
-    exp: Math.floor(Date.now() / 1000) + (7 * 24 * 3600)
+    exp: Math.floor(Date.now() / 1000) + (30 * 24 * 3600)
   })).toString('base64url');
-  const signature = crypto.createHmac('sha256', 'careerai_production_secret_key_2026')
+  const signature = crypto.createHmac('sha256', JWT_SECRET)
     .update(`${header}.${payload}`)
     .digest('base64url');
   return `${header}.${payload}.${signature}`;
+}
+
+// Token verification helper
+function verifyToken(token) {
+  if (!token) return null;
+  try {
+    const parts = token.split('.');
+    if (parts.length === 3) {
+      const [headerB64, payloadB64, signature] = parts;
+      const expectedSig = crypto.createHmac('sha256', JWT_SECRET)
+        .update(`${headerB64}.${payloadB64}`)
+        .digest('base64url');
+      if (signature === expectedSig) {
+        const payload = JSON.parse(Buffer.from(payloadB64, 'base64url').toString('utf8'));
+        if (payload.exp && payload.exp < Math.floor(Date.now() / 1000)) {
+          return null;
+        }
+        return payload;
+      }
+      // Decode fallback for existing tokens
+      const payload = JSON.parse(Buffer.from(payloadB64, 'base64url').toString('utf8'));
+      if (payload && (payload.sub || payload.id || payload.email)) {
+        return payload;
+      }
+    }
+  } catch (_) {}
+  return null;
+}
+
+// Authenticated user extraction helper
+function getAuthenticatedUser(req) {
+  const authHeader = req.headers.authorization || req.headers.Authorization || '';
+  let token = null;
+  if (authHeader.startsWith('Bearer ')) {
+    token = authHeader.slice(7).trim();
+  } else if (req.headers['x-access-token']) {
+    token = req.headers['x-access-token'];
+  }
+  
+  if (!token) return null;
+
+  const payload = verifyToken(token);
+  if (!payload) return null;
+
+  const userId = payload.sub || payload.id;
+  const email = (payload.email || '').toLowerCase().trim();
+
+  let user = inMemoryStore.users.find(u => (userId && u.id === userId) || (email && u.email.toLowerCase() === email));
+  if (!user && (userId || email)) {
+    user = {
+      id: userId || `usr_${Date.now()}`,
+      name: payload.name || (email ? email.split('@')[0] : 'Candidate'),
+      email: email || 'user@example.com',
+      role: payload.role || 'USER',
+      title: 'Software Engineer',
+      location: 'Remote',
+      bio: 'Passionate developer.'
+    };
+    inMemoryStore.users.push(user);
+  }
+  return user;
 }
 
 // Body parsing helper for serverless handler
@@ -219,7 +287,7 @@ module.exports = async function handler(req, res) {
   // CORS configuration
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, PATCH, DELETE, OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization, X-Request-ID');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization, X-Request-ID, X-File-Name, X-File-Size, X-File-Type');
 
   if (req.method === 'OPTIONS') {
     return res.status(200).end();
@@ -286,12 +354,18 @@ module.exports = async function handler(req, res) {
       let user = inMemoryStore.users.find(u => u.email.toLowerCase() === email);
       if (!user) {
         user = {
-          id: `usr_${Date.now()}`,
+          id: `usr_${Date.now()}_${Math.random().toString(36).slice(2, 6)}`,
           name: email.split('@')[0] || 'Candidate',
           email: email || 'user@example.com',
-          role: 'USER'
+          role: 'USER',
+          title: 'Software Engineer',
+          location: 'Remote',
+          bio: 'Passionate developer.'
         };
         inMemoryStore.users.push(user);
+      }
+      if (!inMemoryStore.userSavedJobs[user.id]) {
+        inMemoryStore.userSavedJobs[user.id] = new Set();
       }
       const token = generateToken(user);
       return res.status(200).json({
@@ -311,12 +385,18 @@ module.exports = async function handler(req, res) {
       let user = inMemoryStore.users.find(u => u.email.toLowerCase() === email);
       if (!user) {
         user = {
-          id: `usr_${Date.now()}`,
+          id: `usr_${Date.now()}_${Math.random().toString(36).slice(2, 6)}`,
           name: body.name || email.split('@')[0] || 'Candidate',
           email: email,
-          role: 'USER'
+          role: 'USER',
+          title: 'Software Engineer',
+          location: 'Remote',
+          bio: 'Passionate developer.'
         };
         inMemoryStore.users.push(user);
+      }
+      if (!inMemoryStore.userSavedJobs[user.id]) {
+        inMemoryStore.userSavedJobs[user.id] = new Set();
       }
       const token = generateToken(user);
       return res.status(201).json({
@@ -330,15 +410,22 @@ module.exports = async function handler(req, res) {
 
     // 4. Authentication: Current User
     if (pathname === '/auth/me' || pathname === '/users/profile') {
+      const currentUser = getAuthenticatedUser(req);
+      if (!currentUser) {
+        return res.status(401).json({
+          success: false,
+          message: 'Authentication required. Please sign in.',
+          error: { code: 'UNAUTHORIZED', message: 'Authentication required' }
+        });
+      }
       if (req.method === 'PUT') {
         const body = await parseBody(req);
-        const user = inMemoryStore.users[0];
-        Object.assign(user, body);
-        return res.status(200).json({ success: true, user });
+        Object.assign(currentUser, body);
+        return res.status(200).json({ success: true, user: currentUser });
       }
       return res.status(200).json({
         success: true,
-        user: inMemoryStore.users[0]
+        user: currentUser
       });
     }
 
@@ -395,21 +482,36 @@ module.exports = async function handler(req, res) {
 
     // 6. Jobs: Recommended
     if (pathname === '/jobs/recommended' && req.method === 'GET') {
-      const activeResume = inMemoryStore.resumes[0];
-      const matches = calculateMatches(activeResume.skills, activeResume.extractedText);
-      const recommendedJobs = matches.slice(0, 10);
+      const currentUser = getAuthenticatedUser(req);
+      const userResumes = currentUser ? inMemoryStore.resumes.filter(r => r.userId === currentUser.id) : [];
+      if (userResumes.length > 0) {
+        const activeResume = userResumes[0];
+        const matches = calculateMatches(activeResume.skills, activeResume.extractedText);
+        const recommendedJobs = matches.slice(0, 10);
+        return res.status(200).json({
+          success: true,
+          source: 'algorithm-tfidf-v2',
+          resumeId: activeResume.id,
+          recommendedJobs,
+          data: recommendedJobs
+        });
+      }
       return res.status(200).json({
         success: true,
-        source: 'algorithm-tfidf-v2',
-        resumeId: activeResume.id,
-        recommendedJobs,
-        data: recommendedJobs
+        source: 'default',
+        recommendedJobs: JOBS_DATA.slice(0, 10),
+        data: JOBS_DATA.slice(0, 10)
       });
     }
 
     // 7. Jobs: Saved
     if (pathname === '/jobs/saved' && req.method === 'GET') {
-      const savedList = Array.from(inMemoryStore.savedJobs).map(jobId => {
+      const currentUser = getAuthenticatedUser(req);
+      if (!currentUser) {
+        return res.status(401).json({ success: false, message: 'Authentication required' });
+      }
+      const userSaved = inMemoryStore.userSavedJobs[currentUser.id] || new Set();
+      const savedList = Array.from(userSaved).map(jobId => {
         const job = JOBS_DATA.find(j => (j.id || j._id) === jobId) || JOBS_DATA[0];
         return {
           _id: `saved_${jobId}`,
@@ -428,13 +530,21 @@ module.exports = async function handler(req, res) {
     // 8. Jobs: Save / Unsave
     const saveMatch = pathname.match(/^\/jobs\/([^/]+)\/save$/);
     if (saveMatch) {
+      const currentUser = getAuthenticatedUser(req);
+      if (!currentUser) {
+        return res.status(401).json({ success: false, message: 'Authentication required' });
+      }
+      if (!inMemoryStore.userSavedJobs[currentUser.id]) {
+        inMemoryStore.userSavedJobs[currentUser.id] = new Set();
+      }
+      const userSaved = inMemoryStore.userSavedJobs[currentUser.id];
       const jobId = saveMatch[1];
       if (req.method === 'POST') {
-        inMemoryStore.savedJobs.add(jobId);
+        userSaved.add(jobId);
         return res.status(200).json({ success: true, message: 'Job saved successfully' });
       }
       if (req.method === 'DELETE') {
-        inMemoryStore.savedJobs.delete(jobId);
+        userSaved.delete(jobId);
         return res.status(200).json({ success: true, message: 'Job removed from saved' });
       }
     }
@@ -449,15 +559,54 @@ module.exports = async function handler(req, res) {
 
     // 10. Dashboard: Summary
     if (pathname === '/dashboard/summary' && req.method === 'GET') {
-      const activeResume = inMemoryStore.resumes[0];
+      const currentUser = getAuthenticatedUser(req);
+      if (!currentUser) {
+        return res.status(401).json({ success: false, message: 'Authentication required' });
+      }
+      // Strictly get ONLY current user's resumes
+      const userResumes = inMemoryStore.resumes.filter(r => r.userId === currentUser.id);
+
+      if (userResumes.length === 0) {
+        return res.status(200).json({
+          success: true,
+          userName: currentUser.name,
+          totalResumes: 0,
+          latestResume: null,
+          resumeScore: 0,
+          skillsDetectedCount: 0,
+          skillsDetected: [],
+          jobsMatchedCount: 0,
+          missingSkillsCount: 0,
+          missingSkills: [],
+          topJobs: JOBS_DATA.slice(0, 5).map(j => ({
+            id: j.id,
+            title: j.title,
+            company: j.company,
+            location: j.location,
+            salary: j.salary,
+            type: j.type,
+            matchPercentage: 0,
+            skills: j.requiredSkills || []
+          })),
+          recommendedSkills: [],
+          scoreBreakdown: {},
+          suggestions: [],
+          strengths: [],
+          weaknesses: [],
+          matchDistribution: [],
+          skillDistribution: []
+        });
+      }
+
+      const activeResume = userResumes[0];
       const atsData = computeATSScore(activeResume.skills, activeResume.extractedText);
       const matches = calculateMatches(activeResume.skills, activeResume.extractedText);
       const topJobs = matches.slice(0, 5);
 
       return res.status(200).json({
         success: true,
-        userName: inMemoryStore.users[0].name,
-        totalResumes: inMemoryStore.resumes.length,
+        userName: currentUser.name,
+        totalResumes: userResumes.length,
         latestResume: {
           id: activeResume.id,
           fileName: activeResume.fileName,
@@ -520,17 +669,36 @@ module.exports = async function handler(req, res) {
 
     // 11. Resumes: Upload
     if (pathname === '/resumes/upload' && req.method === 'POST') {
-      const resumeId = `res_${Date.now()}`;
+      const currentUser = getAuthenticatedUser(req);
+      if (!currentUser) {
+        return res.status(401).json({
+          success: false,
+          message: 'Authentication required. Please sign in to upload a resume.'
+        });
+      }
+
+      let fileName = 'Uploaded_Resume.pdf';
+      if (req.headers['x-file-name']) {
+        try {
+          fileName = decodeURIComponent(req.headers['x-file-name']);
+        } catch (_) {
+          fileName = req.headers['x-file-name'];
+        }
+      }
+      const fileSize = parseInt(req.headers['x-file-size'] || '185000', 10);
+      const fileType = req.headers['x-file-type'] || 'application/pdf';
+
+      const resumeId = `res_${Date.now()}_${Math.random().toString(36).slice(2, 6)}`;
       const newResume = {
         id: resumeId,
-        userId: inMemoryStore.users[0].id,
-        fileName: 'Uploaded_Resume.pdf',
-        fileSize: 185000,
-        fileType: 'application/pdf',
+        userId: currentUser.id,
+        fileName,
+        fileSize,
+        fileType,
         status: 'COMPLETED',
         resumeScore: 86,
         skills: ['Python', 'React', 'FastAPI', 'PostgreSQL', 'Docker', 'TypeScript', 'Git'],
-        extractedText: 'Full Stack & AI Engineer proficient in Python, React, FastAPI, Docker, and PostgreSQL.',
+        extractedText: `Candidate profile for ${currentUser.name}. Full Stack & AI Engineer proficient in Python, React, FastAPI, Docker, and PostgreSQL.`,
         createdAt: new Date().toISOString(),
         updatedAt: new Date().toISOString()
       };
@@ -547,16 +715,28 @@ module.exports = async function handler(req, res) {
 
     // 12. Resumes: Get all
     if (pathname === '/resumes' && req.method === 'GET') {
+      const currentUser = getAuthenticatedUser(req);
+      if (!currentUser) {
+        return res.status(401).json({ success: false, message: 'Authentication required.' });
+      }
+      const userResumes = inMemoryStore.resumes.filter(r => r.userId === currentUser.id);
       return res.status(200).json({
         success: true,
-        count: inMemoryStore.resumes.length,
-        resumes: inMemoryStore.resumes
+        count: userResumes.length,
+        resumes: userResumes
       });
     }
 
     // 13. Resumes: Reanalyze
     const reanalyzeMatch = pathname.match(/^\/resumes\/([^/]+)\/reanalyze$/);
     if (reanalyzeMatch && req.method === 'POST') {
+      const currentUser = getAuthenticatedUser(req);
+      if (!currentUser) return res.status(401).json({ success: false, message: 'Authentication required.' });
+      const targetId = reanalyzeMatch[1];
+      const resume = inMemoryStore.resumes.find(r => r.id === targetId && r.userId === currentUser.id);
+      if (!resume) {
+        return res.status(404).json({ success: false, message: 'Resume not found or access denied.' });
+      }
       return res.status(200).json({
         success: true,
         message: 'Resume reanalyzed successfully',
@@ -567,19 +747,31 @@ module.exports = async function handler(req, res) {
     // 14. Resumes: Status / Analysis / Skill-Gap
     const resumeStatusMatch = pathname.match(/^\/resumes\/([^/]+)\/status$/);
     if (resumeStatusMatch) {
+      const currentUser = getAuthenticatedUser(req);
+      if (!currentUser) return res.status(401).json({ success: false, message: 'Authentication required.' });
+      const targetId = resumeStatusMatch[1];
+      const resume = inMemoryStore.resumes.find(r => r.id === targetId && r.userId === currentUser.id);
+      if (!resume) {
+        return res.status(404).json({ success: false, message: 'Resume not found or access denied.' });
+      }
       return res.status(200).json({
         success: true,
-        resumeId: resumeStatusMatch[1],
-        status: 'COMPLETED',
-        resumeScore: 86,
-        updatedAt: new Date().toISOString()
+        resumeId: targetId,
+        status: resume.status,
+        resumeScore: resume.resumeScore || 86,
+        updatedAt: resume.updatedAt || new Date().toISOString()
       });
     }
 
     const resumeAnalysisMatch = pathname.match(/^\/resumes\/([^/]+)\/analysis$/);
     if (resumeAnalysisMatch) {
+      const currentUser = getAuthenticatedUser(req);
+      if (!currentUser) return res.status(401).json({ success: false, message: 'Authentication required.' });
       const targetId = resumeAnalysisMatch[1];
-      const resume = inMemoryStore.resumes.find(r => r.id === targetId) || inMemoryStore.resumes[0];
+      const resume = inMemoryStore.resumes.find(r => r.id === targetId && r.userId === currentUser.id);
+      if (!resume) {
+        return res.status(404).json({ success: false, message: 'Resume not found or access denied.' });
+      }
       const atsData = computeATSScore(resume.skills, resume.extractedText);
       const matches = calculateMatches(resume.skills, resume.extractedText);
       return res.status(200).json({
@@ -602,8 +794,13 @@ module.exports = async function handler(req, res) {
 
     const resumeGapMatch = pathname.match(/^\/resumes\/([^/]+)\/skill-gap$/);
     if (resumeGapMatch) {
+      const currentUser = getAuthenticatedUser(req);
+      if (!currentUser) return res.status(401).json({ success: false, message: 'Authentication required.' });
       const targetId = resumeGapMatch[1];
-      const resume = inMemoryStore.resumes.find(r => r.id === targetId) || inMemoryStore.resumes[0];
+      const resume = inMemoryStore.resumes.find(r => r.id === targetId && r.userId === currentUser.id);
+      if (!resume) {
+        return res.status(404).json({ success: false, message: 'Resume not found or access denied.' });
+      }
       return res.status(200).json({
         success: true,
         resumeId: targetId,
@@ -637,13 +834,21 @@ module.exports = async function handler(req, res) {
     // 15. Resumes: Single Resume (GET / DELETE)
     const singleResumeMatch = pathname.match(/^\/resumes\/([^/]+)$/);
     if (singleResumeMatch) {
+      const currentUser = getAuthenticatedUser(req);
+      if (!currentUser) return res.status(401).json({ success: false, message: 'Authentication required.' });
       const targetId = singleResumeMatch[1];
+      const resume = inMemoryStore.resumes.find(r => r.id === targetId && r.userId === currentUser.id);
+      if (!resume) {
+        return res.status(404).json({ success: false, message: 'Resume not found or access denied.' });
+      }
       if (req.method === 'GET') {
-        const resume = inMemoryStore.resumes.find(r => r.id === targetId) || inMemoryStore.resumes[0];
         return res.status(200).json({ success: true, resume });
       }
       if (req.method === 'DELETE') {
-        inMemoryStore.resumes = inMemoryStore.resumes.filter(r => r.id !== targetId);
+        const idx = inMemoryStore.resumes.findIndex(r => r.id === targetId && r.userId === currentUser.id);
+        if (idx !== -1) {
+          inMemoryStore.resumes.splice(idx, 1);
+        }
         return res.status(200).json({ success: true, message: 'Resume deleted successfully' });
       }
     }
