@@ -112,7 +112,7 @@ export const ProfilePage: React.FC = () => {
                   type="text"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
-                  placeholder="e.g. Aditya Gupta"
+                  placeholder="e.g. Alex Morgan"
                   required
                   className="w-full bg-white border border-slate-300 rounded-md pl-9 pr-3 py-2 text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-blue-600"
                 />

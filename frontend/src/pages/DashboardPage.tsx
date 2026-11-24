@@ -131,6 +131,7 @@ export const DashboardPage: React.FC = () => {
               value={data?.resumeScore || 0}
               size={48}
               strokeWidth={4}
+              hideLabel={true}
             />
           </div>
         </Card>
@@ -218,16 +219,15 @@ export const DashboardPage: React.FC = () => {
                 <div className="flex items-center gap-5 my-2">
                   <div className="relative shrink-0">
                     <CircularProgress
-                      value={data.resumeScore || 86}
+                      value={data.resumeScore || 0}
                       size={92}
                       strokeWidth={8}
-                    />
-                    <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
+                    >
                       <span className="text-2xl font-black text-slate-900 tracking-tight">
-                        {data.resumeScore || 86}
+                        {data.resumeScore || 0}
                       </span>
                       <span className="text-[9px] uppercase font-bold text-slate-400">/ 100</span>
-                    </div>
+                    </CircularProgress>
                   </div>
 
                   <div className="space-y-1">

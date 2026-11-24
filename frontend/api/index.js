@@ -45,21 +45,8 @@ const inMemoryStore = {
   userSavedJobs: {
     'usr_default_aditya': new Set()
   },
-  resumes: [
-    {
-      id: 'res_sample_01',
-      userId: 'usr_default_aditya',
-      fileName: 'Aditya_Gupta_Resume.pdf',
-      fileSize: 142500,
-      fileType: 'application/pdf',
-      status: 'COMPLETED',
-      resumeScore: 84,
-      skills: ['Python', 'React', 'Node.js', 'FastAPI', 'Docker', 'PostgreSQL', 'Redis', 'TypeScript', 'Git', 'AWS'],
-      extractedText: 'Senior Full Stack & AI Engineer with 4 years experience in Python, React, Node.js, FastAPI, Docker, and PostgreSQL.',
-      createdAt: new Date().toISOString(),
-      updatedAt: new Date().toISOString()
-    }
-  ]
+  // Resumes list: strictly empty by default, populated only when the user uploads
+  resumes: []
 };
 
 // Canonical skill lexicon
@@ -691,6 +678,7 @@ module.exports = async function handler(req, res) {
       const resumeId = `res_${Date.now()}_${Math.random().toString(36).slice(2, 6)}`;
       const newResume = {
         id: resumeId,
+        _id: resumeId,
         userId: currentUser.id,
         fileName,
         fileSize,
@@ -733,7 +721,7 @@ module.exports = async function handler(req, res) {
       const currentUser = getAuthenticatedUser(req);
       if (!currentUser) return res.status(401).json({ success: false, message: 'Authentication required.' });
       const targetId = reanalyzeMatch[1];
-      const resume = inMemoryStore.resumes.find(r => r.id === targetId && r.userId === currentUser.id);
+      const resume = inMemoryStore.resumes.find(r => (r.id === targetId || r._id === targetId) && r.userId === currentUser.id);
       if (!resume) {
         return res.status(404).json({ success: false, message: 'Resume not found or access denied.' });
       }
@@ -750,7 +738,7 @@ module.exports = async function handler(req, res) {
       const currentUser = getAuthenticatedUser(req);
       if (!currentUser) return res.status(401).json({ success: false, message: 'Authentication required.' });
       const targetId = resumeStatusMatch[1];
-      const resume = inMemoryStore.resumes.find(r => r.id === targetId && r.userId === currentUser.id);
+      const resume = inMemoryStore.resumes.find(r => (r.id === targetId || r._id === targetId) && r.userId === currentUser.id);
       if (!resume) {
         return res.status(404).json({ success: false, message: 'Resume not found or access denied.' });
       }
@@ -768,7 +756,7 @@ module.exports = async function handler(req, res) {
       const currentUser = getAuthenticatedUser(req);
       if (!currentUser) return res.status(401).json({ success: false, message: 'Authentication required.' });
       const targetId = resumeAnalysisMatch[1];
-      const resume = inMemoryStore.resumes.find(r => r.id === targetId && r.userId === currentUser.id);
+      const resume = inMemoryStore.resumes.find(r => (r.id === targetId || r._id === targetId) && r.userId === currentUser.id);
       if (!resume) {
         return res.status(404).json({ success: false, message: 'Resume not found or access denied.' });
       }
@@ -797,7 +785,7 @@ module.exports = async function handler(req, res) {
       const currentUser = getAuthenticatedUser(req);
       if (!currentUser) return res.status(401).json({ success: false, message: 'Authentication required.' });
       const targetId = resumeGapMatch[1];
-      const resume = inMemoryStore.resumes.find(r => r.id === targetId && r.userId === currentUser.id);
+      const resume = inMemoryStore.resumes.find(r => (r.id === targetId || r._id === targetId) && r.userId === currentUser.id);
       if (!resume) {
         return res.status(404).json({ success: false, message: 'Resume not found or access denied.' });
       }
@@ -837,7 +825,7 @@ module.exports = async function handler(req, res) {
       const currentUser = getAuthenticatedUser(req);
       if (!currentUser) return res.status(401).json({ success: false, message: 'Authentication required.' });
       const targetId = singleResumeMatch[1];
-      const resume = inMemoryStore.resumes.find(r => r.id === targetId && r.userId === currentUser.id);
+      const resume = inMemoryStore.resumes.find(r => (r.id === targetId || r._id === targetId) && r.userId === currentUser.id);
       if (!resume) {
         return res.status(404).json({ success: false, message: 'Resume not found or access denied.' });
       }
@@ -845,11 +833,10 @@ module.exports = async function handler(req, res) {
         return res.status(200).json({ success: true, resume });
       }
       if (req.method === 'DELETE') {
-        const idx = inMemoryStore.resumes.findIndex(r => r.id === targetId && r.userId === currentUser.id);
-        if (idx !== -1) {
-          inMemoryStore.resumes.splice(idx, 1);
-        }
-        return res.status(200).json({ success: true, message: 'Resume deleted successfully' });
+        inMemoryStore.resumes = inMemoryStore.resumes.filter(
+          r => !((r.id === targetId || r._id === targetId) && r.userId === currentUser.id)
+        );
+        return res.status(200).json({ success: true, message: 'Resume and analysis history deleted successfully' });
       }
     }
 

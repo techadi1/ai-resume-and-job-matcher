@@ -46,10 +46,10 @@ const InteractiveCameraRig: React.FC = () => {
 };
 
 export const HeroScene: React.FC<HeroSceneProps> = ({
-  score = 84,
-  matchRate = 87,
-  candidateName = "Aditya Gupta",
-  targetRole = "Software Engineer",
+  score = 88,
+  matchRate = 92,
+  candidateName = "Alex Morgan",
+  targetRole = "Senior Software Engineer",
   skills = ["Python", "React", "Node.js", "MongoDB", "Docker", "AWS"],
 }) => {
   return (

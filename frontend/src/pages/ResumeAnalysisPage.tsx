@@ -187,16 +187,15 @@ export const ResumeAnalysisPage: React.FC = () => {
           <div className="lg:col-span-5 flex flex-col sm:flex-row items-center sm:items-start gap-5 border-b lg:border-b-0 lg:border-r border-slate-100 pb-6 lg:pb-0 lg:pr-6">
             <div className="relative shrink-0">
               <CircularProgress
-                value={resume.resumeScore || 86}
+                value={resume.resumeScore || 0}
                 size={110}
                 strokeWidth={9}
-              />
-              <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
+              >
                 <span className="text-3xl font-extrabold text-slate-900 tracking-tight">
-                  {resume.resumeScore || 86}
+                  {resume.resumeScore || 0}
                 </span>
                 <span className="text-[10px] uppercase font-bold text-slate-400">/ 100</span>
-              </div>
+              </CircularProgress>
             </div>
 
             <div className="space-y-1.5 text-center sm:text-left">

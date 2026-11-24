@@ -11,9 +11,9 @@ interface Resume3DProps {
 }
 
 export const Resume3D: React.FC<Resume3DProps> = ({
-  score = 84,
-  candidateName = "Aditya Gupta",
-  targetRole = "Software Engineer",
+  score = 88,
+  candidateName = "Alex Morgan",
+  targetRole = "Senior Software Engineer",
   onHover,
 }) => {
   const meshRef = useRef<THREE.Group>(null);

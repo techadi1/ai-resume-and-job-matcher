@@ -9,6 +9,8 @@ interface CircularProgressProps {
   label?: string;
   sublabel?: string;
   isPercentage?: boolean;
+  hideLabel?: boolean;
+  children?: React.ReactNode;
 }
 
 export const CircularProgress: React.FC<CircularProgressProps> = ({
@@ -19,7 +21,9 @@ export const CircularProgress: React.FC<CircularProgressProps> = ({
   color,
   label,
   sublabel,
-  isPercentage = false
+  isPercentage = false,
+  hideLabel = false,
+  children,
 }) => {
   const actualScore = value !== undefined ? value : score !== undefined ? score : 0;
   const radius = (size - strokeWidth) / 2;
@@ -63,19 +67,27 @@ export const CircularProgress: React.FC<CircularProgressProps> = ({
           className="transition-all duration-700 ease-out"
         />
       </svg>
-      {/* Inner Label */}
-      <div className="absolute inset-0 flex flex-col items-center justify-center text-center">
-        <span className="text-2xl font-bold text-slate-900 tracking-tight">
-          {Math.round(actualScore)}
-          {isPercentage ? (
-            <span className="text-xs font-normal text-slate-500">%</span>
+      {/* Inner Label or Custom Content */}
+      {!hideLabel && (
+        <div className="absolute inset-0 flex flex-col items-center justify-center text-center pointer-events-none">
+          {children ? (
+            children
           ) : (
-            <span className="text-xs font-normal text-slate-500">/100</span>
+            <>
+              <span className="text-2xl font-bold text-slate-900 tracking-tight">
+                {Math.round(actualScore)}
+                {isPercentage ? (
+                  <span className="text-xs font-normal text-slate-500">%</span>
+                ) : (
+                  <span className="text-xs font-normal text-slate-500">/100</span>
+                )}
+              </span>
+              {label && <span className="text-xs font-medium text-slate-600 mt-0.5">{label}</span>}
+              {sublabel && <span className="text-[10px] text-slate-400">{sublabel}</span>}
+            </>
           )}
-        </span>
-        {label && <span className="text-xs font-medium text-slate-600 mt-0.5">{label}</span>}
-        {sublabel && <span className="text-[10px] text-slate-400">{sublabel}</span>}
-      </div>
+        </div>
+      )}
     </div>
   );
 };
