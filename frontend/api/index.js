@@ -234,7 +234,12 @@ module.exports = async function handler(req, res) {
       pathname = '/' + req.query.path;
     }
   } else {
-    const rawPath = req.headers['x-vercel-original-path'] || req.headers['x-matched-path'] || req.url || '/';
+    const rawPath =
+      req.headers['x-forwarded-uri'] ||
+      req.headers['x-vercel-original-path'] ||
+      req.headers['x-matched-path'] ||
+      req.url ||
+      '/';
     try {
       const parsed = new URL(rawPath, `http://${req.headers.host || 'localhost'}`);
       pathname = parsed.pathname;
