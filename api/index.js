@@ -14,22 +14,16 @@ const crypto = require('crypto');
 
 // Load canonical jobs dataset
 let JOBS_DATA = [];
-const possibleJobPaths = [
-  path.join(__dirname, 'jobs.json'),
-  path.join(__dirname, '../data/jobs.json'),
-  path.join(__dirname, '../../data/jobs.json'),
-  path.join(process.cwd(), 'data/jobs.json'),
-  path.join(process.cwd(), 'api/jobs.json'),
-  path.join(process.cwd(), 'frontend/api/jobs.json')
-];
-
-for (const p of possibleJobPaths) {
-  if (fs.existsSync(p)) {
+try {
+  JOBS_DATA = require('./jobs.json');
+} catch (e1) {
+  try {
+    JOBS_DATA = require('../data/jobs.json');
+  } catch (e2) {
     try {
-      JOBS_DATA = JSON.parse(fs.readFileSync(p, 'utf8'));
-      break;
-    } catch (e) {
-      console.error('Failed to parse jobs file at', p, e);
+      JOBS_DATA = require('../../data/jobs.json');
+    } catch (e3) {
+      JOBS_DATA = [];
     }
   }
 }
@@ -554,7 +548,17 @@ module.exports = async function handler(req, res) {
       });
     }
 
-    // 13. Resumes: Status / Analysis / Skill-Gap
+    // 13. Resumes: Reanalyze
+    const reanalyzeMatch = pathname.match(/^\/resumes\/([^/]+)\/reanalyze$/);
+    if (reanalyzeMatch && req.method === 'POST') {
+      return res.status(200).json({
+        success: true,
+        message: 'Resume reanalyzed successfully',
+        status: 'COMPLETED'
+      });
+    }
+
+    // 14. Resumes: Status / Analysis / Skill-Gap
     const resumeStatusMatch = pathname.match(/^\/resumes\/([^/]+)\/status$/);
     if (resumeStatusMatch) {
       return res.status(200).json({
@@ -568,7 +572,8 @@ module.exports = async function handler(req, res) {
 
     const resumeAnalysisMatch = pathname.match(/^\/resumes\/([^/]+)\/analysis$/);
     if (resumeAnalysisMatch) {
-      const resume = inMemoryStore.resumes[0];
+      const targetId = resumeAnalysisMatch[1];
+      const resume = inMemoryStore.resumes.find(r => r.id === targetId) || inMemoryStore.resumes[0];
       const atsData = computeATSScore(resume.skills, resume.extractedText);
       const matches = calculateMatches(resume.skills, resume.extractedText);
       return res.status(200).json({
@@ -589,9 +594,14 @@ module.exports = async function handler(req, res) {
 
     const resumeGapMatch = pathname.match(/^\/resumes\/([^/]+)\/skill-gap$/);
     if (resumeGapMatch) {
+      const targetId = resumeGapMatch[1];
+      const resume = inMemoryStore.resumes.find(r => r.id === targetId) || inMemoryStore.resumes[0];
       return res.status(200).json({
         success: true,
-        resumeId: resumeGapMatch[1],
+        resumeId: targetId,
+        resumeSkills: resume.skills,
+        totalMissingSkills: 3,
+        topMissingSkills: ['Kubernetes', 'AWS', 'GraphQL'],
         missingSkills: ['Kubernetes', 'AWS', 'GraphQL'],
         recommendedSkills: [
           {
@@ -602,9 +612,32 @@ module.exports = async function handler(req, res) {
             whyMatters: 'Essential for microservice orchestration in modern enterprise environments.',
             jobsRequiring: ['Senior Backend Engineer'],
             learningPath: ['Master Pod and Deployment specs', 'Deploy with Helm', 'Automate CI/CD']
+          },
+          {
+            skill: 'AWS',
+            frequency: 18,
+            priority: 'HIGH',
+            category: 'Cloud Services',
+            whyMatters: 'Industry-standard cloud provider for scalable microservices.',
+            jobsRequiring: ['Full Stack Engineer', 'Cloud Architect'],
+            learningPath: ['Master EC2, S3, and IAM', 'Deploy serverless APIs', 'Configure VPC and RDS']
           }
         ]
       });
+    }
+
+    // 15. Resumes: Single Resume (GET / DELETE)
+    const singleResumeMatch = pathname.match(/^\/resumes\/([^/]+)$/);
+    if (singleResumeMatch) {
+      const targetId = singleResumeMatch[1];
+      if (req.method === 'GET') {
+        const resume = inMemoryStore.resumes.find(r => r.id === targetId) || inMemoryStore.resumes[0];
+        return res.status(200).json({ success: true, resume });
+      }
+      if (req.method === 'DELETE') {
+        inMemoryStore.resumes = inMemoryStore.resumes.filter(r => r.id !== targetId);
+        return res.status(200).json({ success: true, message: 'Resume deleted successfully' });
+      }
     }
 
     // Fallback 404

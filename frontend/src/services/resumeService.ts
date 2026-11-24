@@ -30,9 +30,7 @@ export const resumeService = {
   async uploadResume(file: File): Promise<UploadResponse> {
     const formData = new FormData();
     formData.append("resume", file);
-    const res = await api.post<any>("/resumes/upload", formData, {
-      headers: { "Content-Type": "multipart/form-data" },
-    });
+    const res = await api.post<any>("/resumes/upload", formData);
     const d = res.data;
     const inner = d.data || {};
     return {
