@@ -588,7 +588,9 @@ module.exports = async function handler(req, res) {
         resume,
         analysis: {
           atsScore: atsData.score,
+          overallScore: atsData.score,
           breakdown: atsData.breakdown,
+          scoreBreakdown: atsData.breakdown,
           skills: resume.skills,
           strengths: atsData.strengths,
           weaknesses: atsData.weaknesses,
